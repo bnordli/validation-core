@@ -19,13 +19,13 @@ service DeliveryTypeService {
 
   // List all existing delivery types.
   rpc ListDeliveryTypes(ListDeliveryTypesRequest) returns (ListDeliveryTypesResponse) {
-    option (google.api.http) = {get: "/v1/deliveryTypes"};
+    option (google.api.http) = {get: "/v1/delivery-types"};
     option (gnostic.openapi.v3.operation) = {summary: "List all existing delivery types."};
   }
 
   // Get one delivery type by its id.
   rpc GetDeliveryType(GetDeliveryTypeRequest) returns (entur.validation.v1.DeliveryType) {
-    option (google.api.http) = {get: "/v1/deliveryTypes/{name}"};
+    option (google.api.http) = {get: "/v1/delivery-types/{name}"};
     option (gnostic.openapi.v3.operation) = {summary: "Get one delivery type by its id."};
   }
 }

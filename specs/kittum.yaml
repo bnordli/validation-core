@@ -49,7 +49,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Area'
-    /v1/deliveryTypes:
+    /v1/delivery-types:
         get:
             tags:
                 - DeliveryTypeService
@@ -63,7 +63,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/ListDeliveryTypesResponse'
-    /v1/deliveryTypes/{name}:
+    /v1/delivery-types/{name}:
         get:
             tags:
                 - DeliveryTypeService
