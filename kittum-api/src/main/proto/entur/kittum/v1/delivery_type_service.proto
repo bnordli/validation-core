@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package entur.kittum.v1;
 
-import "entur/validation/v1/area.proto";
 import "entur/validation/v1/delivery_type.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/api/annotations.proto";
@@ -23,7 +22,7 @@ service DeliveryTypeService {
     option (gnostic.openapi.v3.operation) = {summary: "List all existing delivery types."};
   }
 
-  // Get one delivery type by its id.
+  // Get one delivery type by its name.
   rpc GetDeliveryType(GetDeliveryTypeRequest) returns (entur.validation.v1.DeliveryType) {
     option (google.api.http) = {get: "/v1/delivery-types/{name}"};
     option (gnostic.openapi.v3.operation) = {summary: "Get one delivery type by its id."};

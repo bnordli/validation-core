@@ -68,7 +68,7 @@ paths:
             tags:
                 - DeliveryTypeService
             summary: Get one delivery type by its id.
-            description: Get one delivery type by its id.
+            description: Get one delivery type by its name.
             operationId: DeliveryTypeService_GetDeliveryType
             parameters:
                 - name: name
