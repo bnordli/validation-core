@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package entur.kittum.v1;
+
+import "entur/validation/v1/area.proto";
+import "entur/validation/v1/delivery_type.proto";
+import "gnostic/openapi/v3/annotations.proto";
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/field_behavior.proto";
+
+option go_package = "github.com/entur/validation-core/gen/entur/kittum/v1;kittumv1";
+option java_multiple_files = true;
+option java_package = "no.entur.kittum.proto.v1";
+
+// The gRPC service to view and administrate deliveries.
+service DeliveryTypeService {
+  option (google.api.default_host) = "kittum.entur.io";
+
+  // List all existing delivery types.
+  rpc ListDeliveryTypes(ListDeliveryTypesRequest) returns (ListDeliveryTypesResponse) {
+    option (google.api.http) = {get: "/v1/deliveryTypes"};
+    option (gnostic.openapi.v3.operation) = {summary: "List all existing delivery types."};
+  }
+
+  // Get one delivery type by its id.
+  rpc GetDeliveryType(GetDeliveryTypeRequest) returns (entur.validation.v1.DeliveryType) {
+    option (google.api.http) = {get: "/v1/deliveryTypes/{name}"};
+    option (gnostic.openapi.v3.operation) = {summary: "Get one delivery type by its id."};
+  }
+}
+
+// Request for ListDeliveryTypes.
+message ListDeliveryTypesRequest {}
+
+// Response for ListDeliveryTypes.
+message ListDeliveryTypesResponse {
+  // All existing delivery types.
+  repeated entur.validation.v1.DeliveryType delivery_types = 1;
+}
+
+// Request for GetDeliveryType.
+message GetDeliveryTypeRequest {
+  // The name of the delivery type to lookup.
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+}
