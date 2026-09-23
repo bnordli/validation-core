@@ -103,7 +103,7 @@ paths:
         get:
             tags:
                 - SourceService
-            summary: Get one source by its id.
+            summary: Get one source by its name.
             description: Get one source by its name.
             operationId: SourceService_GetSource
             parameters:

@@ -25,7 +25,7 @@ service SourceService {
   // Get one source by its name.
   rpc GetSource(GetSourceRequest) returns (entur.validation.v1.Source) {
     option (google.api.http) = {get: "/v1/sources/{name}"};
-    option (gnostic.openapi.v3.operation) = {summary: "Get one source by its id."};
+    option (gnostic.openapi.v3.operation) = {summary: "Get one source by its name."};
   }
 }
 
