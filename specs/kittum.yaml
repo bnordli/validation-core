@@ -49,41 +49,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Area'
-    /v1/delivery-types:
-        get:
-            tags:
-                - DeliveryTypeService
-            summary: List all existing delivery types.
-            description: List all existing delivery types.
-            operationId: DeliveryTypeService_ListDeliveryTypes
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListDeliveryTypesResponse'
-    /v1/delivery-types/{name}:
-        get:
-            tags:
-                - DeliveryTypeService
-            summary: Get one delivery type by its id.
-            description: Get one delivery type by its name.
-            operationId: DeliveryTypeService_GetDeliveryType
-            parameters:
-                - name: name
-                  in: path
-                  description: The name of the delivery type to lookup.
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/DeliveryType'
     /v1/owners:
         get:
             tags:
@@ -120,6 +85,41 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Owner'
+    /v1/sources:
+        get:
+            tags:
+                - SourceService
+            summary: List all existing sources.
+            description: List all existing sources.
+            operationId: SourceService_ListSources
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListSourcesResponse'
+    /v1/sources/{name}:
+        get:
+            tags:
+                - SourceService
+            summary: Get one source by its id.
+            description: Get one source by its name.
+            operationId: SourceService_GetSource
+            parameters:
+                - name: name
+                  in: path
+                  description: The name of the source to lookup.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Source'
 components:
     schemas:
         Area:
@@ -148,32 +148,6 @@ components:
                     description: The timestamp of the area.
                     format: date-time
             description: A specific area that is interested in validating certain deliveries. Owned by exactly one Owner.
-        DeliveryType:
-            required:
-                - name
-                - owner
-            type: object
-            properties:
-                id:
-                    example: 42
-                    type: integer
-                    description: The database id of the delivery type.
-                    format: int32
-                name:
-                    example: "rutedata"
-                    type: string
-                    description: The name of the delivery type.
-                owner:
-                    example: 3
-                    type: integer
-                    description: The database id of the owner of the delivery type.
-                    format: int32
-                updatedAt:
-                    example: "2026-01-01T00:00:00Z"
-                    type: string
-                    description: The timestamp of the delivery type.
-                    format: date-time
-            description: A named intake point for a set of files, owned by exactly one Owner.
         ListAreasResponse:
             type: object
             properties:
@@ -183,15 +157,6 @@ components:
                         $ref: '#/components/schemas/Area'
                     description: All existing areas.
             description: Response for ListAreas.
-        ListDeliveryTypesResponse:
-            type: object
-            properties:
-                deliveryTypes:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/DeliveryType'
-                    description: All existing delivery types.
-            description: Response for ListDeliveryTypes.
         ListOwnersResponse:
             type: object
             properties:
@@ -201,6 +166,15 @@ components:
                         $ref: '#/components/schemas/Owner'
                     description: All existing owners.
             description: Response for ListOwners.
+        ListSourcesResponse:
+            type: object
+            properties:
+                sources:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Source'
+                    description: All existing sources.
+            description: Response for ListSources.
         Owner:
             required:
                 - name
@@ -221,10 +195,36 @@ components:
                     description: The timestamp of the owner.
                     format: date-time
             description: An owner of deliveries and areas, for example an Entur team.
+        Source:
+            required:
+                - name
+                - owner
+            type: object
+            properties:
+                id:
+                    example: 42
+                    type: integer
+                    description: The database id of the source.
+                    format: int32
+                name:
+                    example: "rutedata"
+                    type: string
+                    description: The name of the source.
+                owner:
+                    example: 3
+                    type: integer
+                    description: The database id of the owner of the source.
+                    format: int32
+                updatedAt:
+                    example: "2026-01-01T00:00:00Z"
+                    type: string
+                    description: The timestamp of the source.
+                    format: date-time
+            description: A named intake point for a set of files, owned by exactly one Owner.
 tags:
     - name: AreaService
       description: The gRPC service to view and administrate areas.
-    - name: DeliveryTypeService
-      description: The gRPC service to view and administrate deliveries.
     - name: OwnerService
       description: The gRPC service to view and administrate owners.
+    - name: SourceService
+      description: The gRPC service to view and administrate sources.
